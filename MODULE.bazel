@@ -11,7 +11,11 @@ module(
 bazel_dep(name = "abseil-cpp", version = "20260107.1", repo_name = "com_google_absl")
 bazel_dep(name = "bazel_skylib", version = "1.9.0")
 bazel_dep(name = "curl", version = "8.12.0.bcr.1")
-bazel_dep(name = "grpc", version = "1.80.0", repo_name = "com_github_grpc_grpc")
+# Downgraded from 1.80.0: grpc@1.76.x+ has repo_name=None bug in MODULE.bazel
+# (Bazel 7.x rejects NoneType for repo_name). grpc@1.75.x+ hardcodes Python
+# 3.14.0b2 in PYTHON_VERSIONS but rules_python@1.5.4 has no s390x sha256 for it.
+# grpc@1.74.1 has neither issue — Python versions capped at 3.13, no envoy_api chain.
+bazel_dep(name = "grpc", version = "1.74.1", repo_name = "com_github_grpc_grpc")
 bazel_dep(name = "nlohmann_json", version = "3.12.0.bcr.1", repo_name = "github_nlohmann_json")
 bazel_dep(name = "opentelemetry-proto", version = "1.8.0", repo_name = "com_github_opentelemetry_proto")
 bazel_dep(name = "opentracing-cpp", version = "1.6.0", repo_name = "com_github_opentracing")
