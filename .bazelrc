@@ -56,3 +56,8 @@ common:ubsan --linkopt -fsanitize=undefined
 common:ubsan --linkopt -fno-sanitize=vptr
 common:ubsan --cc_output_directory_tag=ubsan
 common:ubsan --test_env=UBSAN_OPTIONS=halt_on_error=1:print_stacktrace=1
+
+# s390x porting: cap RAM, show full failure commands, collect all errors in one pass
+build --local_ram_resources=3072
+build --verbose_failures
+build --keep_going
