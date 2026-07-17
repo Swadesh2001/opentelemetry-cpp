@@ -39,3 +39,16 @@ single_version_override(
     patches = ["//patches:boringssl-s390x.patch"],
     patch_strip = 1,
 )
+
+# grpc@1.74.1 is missing #include<algorithm> in glob.cc (std::any_of) and
+# #include<string> in memory_request.h (std::to_string) — gcc 13 on s390x
+# is stricter about implicit includes than older compilers.
+single_version_override(
+    module_name = "grpc",
+    version = "1.74.1",
+    patches = [
+        "//patches:grpc-glob-algorithm.patch",
+        "//patches:grpc-memory-request-string.patch",
+    ],
+    patch_strip = 1,
+)
