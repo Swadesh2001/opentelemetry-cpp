@@ -1,6 +1,6 @@
 --- a/include/openssl/target.h
 +++ b/include/openssl/target.h
-@@ -47,6 +47,9 @@
+@@ -47,6 +47,10 @@
  #elif defined(__riscv) && __SIZEOF_POINTER__ == 4
  #define OPENSSL_32_BIT
 +#elif defined(__s390x__) || defined(__s390__)
